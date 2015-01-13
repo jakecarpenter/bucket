@@ -1,0 +1,20 @@
+{
+  "author": "Jake Carpenter <jake@jakecarpenter.com> (jakecarpenter.com)",
+  "name": "bucket",
+  "description": "Bucket is a Rally ODO",
+  "version": "0.0.0",
+  "homepage": "jakecarpenter.com/bucket",
+  "repository": {
+    "url": ""
+  },
+  "main": "app.coffee",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
