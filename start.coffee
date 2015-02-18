@@ -1,3 +1,7 @@
 fbui = require './display/fb'
 
-timer = setInterval(fbui.draw, 120)
+do timer = ()->
+  setInterval ()->
+    fbui.draw()
+  ,
+  100
