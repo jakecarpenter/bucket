@@ -13,7 +13,7 @@ dotenv.load()
 if "#{process.env.ISPI}" == "1"
   FBui = require './display/fb'
   fbui = new FBui
-  
+
 ## rally stuff
 router = new Router(routes)
 
@@ -33,7 +33,7 @@ app.get "/routes", (request, response)->
 app.get "/odo", (request, response)->
   response.json true
   fbui.updateData
-    odo: 1234
+    odo: Date.now() / 100000
     cast: 32
     instruction: "asdfaslkdfalskdfj"
 
