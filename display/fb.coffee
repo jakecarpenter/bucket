@@ -53,34 +53,32 @@ class FBui
     for i in [1...24]  
       @fb.line(0, i * 10, @bars.left, i * 10)
     
-  #position is the distance from 0 in 1/10 of a second so, -2 means .2 seconds late
-  # marker: (pos)->
-  #   #a place to keep the actual y
-  #   y = 0
-  #   yoff=0
-  #   #if the position is negative, we add 120
-  #   @fb.font("times", 30)
-  #   if pos < -2
-  #     @fb.color(1,0,0)
-  #     y = (Math.abs(pos)*5) 
-  #     yoff = y + 5
-  #     @fb.rect(0, 120, @bars.left, y)
-  #    else if pos > 2
-  #     @fb.color(1,1,0)
-  #     y = -(pos * 5)
-  #     yoff = y - 5 
-  #     @fb.rect(0, 120, @bars.left, y)
-  #     @fb.color([0,1,1])
-  #     @fb.text(14, 100, "AHEAD", false)
-  #    else
-  #     @fb.color(0,1,0)
-  #     y = 120
-  #     @fb.rect(0, 0, @bars.left, @height)
+  # position is the distance from 0 in 1/10 of a second so, -2 means .2 seconds late
+  marker: (pos)->
+    #a place to keep the actual y
+    y = 0
+    yoff= 0
+    #if the position is negative, we add 120
+    @fb.font("times", 30)
+    if pos < -2
+      @fb.color(1,0,0)
+      y = (Math.abs(pos)*5) 
+      yoff = y + 5
+      @fb.rect(0, 120, @bars.left, y)
+     else if pos > 2
+      @fb.color(1,1,0)
+      y = -(pos * 5)
+      yoff = y - 5 
+      @fb.rect(0, 120, @bars.left, y)
+     else
+      @fb.color(0,1,0)
+      y = 120
+      @fb.rect(0, 0, @bars.left, @height)
     
-  #   @fb.color()
-  #   @fb.rect(10, 100, 70, 40)
-  #   @fb.color(1,1,1)
-  #   @fb.text(14, 136, Math.abs(pos * 1)/10, false)
+    @fb.color()
+    @fb.rect(10, 100, 70, 40)
+    @fb.color(1,1,1)
+    @fb.text(14, 136, Math.abs(pos * 1)/10, false)
 
   uiLines: ()->
     @fb.color(@uiLineColor.r,@uiLineColor.g,@uiLineColor.b)
@@ -154,7 +152,7 @@ class FBui
     @uiLines()
     @uiLabels()
     @scaleLines()
-    # marker(@counter - 20)
+    @marker(@counter - 20)
     @odo(11222+@counter)
     @instruction("HARD RT at Stop Sign and then do some stuff so you win!")
     @untilNext(33-@counter)
