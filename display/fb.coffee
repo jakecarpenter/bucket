@@ -62,12 +62,12 @@ class FBui
     @fb.font("times", 30)
     if pos < -2
       @fb.color(1,0,0)
-      y = (Math.abs(pos)*5) 
+      y = (Math.abs(pos)*2.5) 
       yoff = y + 5
       @fb.rect(0, 120, @bars.left, y)
      else if pos > 2
       @fb.color(1,1,0)
-      y = -(pos * 5)
+      y = -(pos * 2.5)
       yoff = y - 5 
       @fb.rect(0, 120, @bars.left, y)
      else
