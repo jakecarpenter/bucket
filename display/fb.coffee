@@ -131,14 +131,14 @@ class FBui
 
     time = Math.floor(Date.now() / 1000);
     @fb.clear()
-    uiLines()
-    scaleLines()
+    @uiLines()
+    @scaleLines()
     # marker(@counter - 20)
-    odo(11222+@counter)
-    instruction("HARD RT at Stop Sign")
-    untilNext(33-@counter)
-    speed(43 + Math.floor(@counter/3))
-    cast(45)
+    @odo(11222+@counter)
+    @instruction("HARD RT at Stop Sign")
+    @untilNext(33-@counter)
+    @speed(43 + Math.floor(@counter/3))
+    @cast(45)
     @fb.blit()
     @counter++
 
