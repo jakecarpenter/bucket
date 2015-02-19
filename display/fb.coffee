@@ -96,12 +96,11 @@ class FBui
     reading = "#{reading}"
     reading = reading.split("").reverse() #string to array
     reading = reading.concat([0,0,0,0,0,0,0,0]).slice(0,8).reverse()
-    console.log reading
     @fb.color(0,0,1)
     @fb.font("arial", 45)
     # lets draw each digit sep. 
     offset = (@width - @bars.left) / 8 # 8 digit odo
-    for i in [1..8]
+    for i in [0..8]
       @fb.text(@bars.left + (offset * i), 50, reading[i])
 
 
