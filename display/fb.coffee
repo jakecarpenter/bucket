@@ -75,17 +75,17 @@ class FBui
   #   @fb.text(14, 136, Math.abs(pos * 1)/10, false)
 
   uiLines: ()->
-    @fb.color(uiLineColor.r,uiLineColor.g,uiLineColor.b)
-    @fb.line(@bars.left, 0, @bars.left, @height, uiLineWidth)
-    @fb.line(@bars.right, @bars.bottom, @bars.right, @height, uiLineWidth)
-    @fb.line(@bars.right, @bars.top, @bars.right, @bars.middle, uiLineWidth)
-    @fb.line(@bars.left, @bars.top, @width, @bars.top, uiLineWidth)
-    @fb.line(@bars.left, @bars.middle, @width, @bars.middle, uiLineWidth)
-    @fb.line(@bars.left, @bars.bottom, @width, @bars.bottom, uiLineWidth)
+    @fb.color(@uiLineColor.r,@uiLineColor.g,@uiLineColor.b)
+    @fb.line(@bars.left, 0, @bars.left, @height, @uiLineWidth)
+    @fb.line(@bars.right, @bars.bottom, @bars.right, @height, @uiLineWidth)
+    @fb.line(@bars.right, @bars.top, @bars.right, @bars.middle, @uiLineWidth)
+    @fb.line(@bars.left, @bars.top, @width, @bars.top, @uiLineWidth)
+    @fb.line(@bars.left, @bars.middle, @width, @bars.middle, @uiLineWidth)
+    @fb.line(@bars.left, @bars.bottom, @width, @bars.bottom, @uiLineWidth)
 
   uiLabels: ()->
-    @fb.color(labelColor.r,labelColor.g,labelColor.b)
-    @fb.font(labelFont, labelSize)
+    @fb.color(@labelColor.r,@labelColor.g,@labelColor.b)
+    @fb.font(@labelFont, @labelSize)
     @fb.text(@bars.left + @labelPadding.x, @labelPadding.y, "overall:")
     @fb.text(@bars.left + @labelPadding.x, @bars.top + @labelPadding.y, "until next:")
     @fb.text(@bars.right + @labelPadding.x, @bars.top + @labelPadding.y, "time rem.:")
