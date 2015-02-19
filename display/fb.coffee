@@ -46,14 +46,15 @@ class FBui
   currentInstruction: "--none loaded--"
   currentCast: 0
 
-  constructor: (interval = 100)->
+  constructor: ->
     @start = Math.floor(Date.now() / 1000)
     @counter = 0
     @fb = pitft "/dev/fb1", true
     @fb.clear()
-    @timer = setInterval =>
-      @draw()
-    , interval
+    do
+      @timer = setInterval =>
+        @draw()
+      , 100
 
   updateData: (data)->
     @currentInstruction ||= data.instruction
