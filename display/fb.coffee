@@ -22,17 +22,18 @@ class FBui
   #label settings
   labelColor:
     r: 0
-    g: 0
+    g: 1
     b: 1
 
   labelFont: "fantasy"
   labelSize: 12
   labelPadding: 
     x: 4
-    y: 10
+    y: 12
 
   constructor: ()->
     @start = Math.floor(Date.now() / 1000)
+    @counter = 0
     @fb = pitft "/dev/fb1", true
     @fb.clear()
 
