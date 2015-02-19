@@ -53,9 +53,9 @@ class FBui
     @fb.clear()
 
   updateData: (data = {})->
-    @currentInstruction ||= data.instruction
-    @currentCast ||= data.cast
-    @currentOdo ||= data.odo
+    @currentInstruction = data.instruction or @currentInstruction
+    @currentCast = data.cast or @currentCast
+    @currentOdo = data.odo or @currentOdo
     @draw()
 
   scaleLines: ()->

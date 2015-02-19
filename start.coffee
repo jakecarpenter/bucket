@@ -22,7 +22,6 @@ if "#{process.env.ISPI}" == "1"
   fbui = new FBui
   do timer = ()->
     setInterval ()->
-      console.log "update!"
       fbui.draw()
     ,
     100
@@ -54,10 +53,11 @@ app.get "/update", (request, response)->
     odo: Date.now()
 
 app.get "/updates", (request, response)->
-  response.json true
-  fbui.updateData
+  resp = 
     cast: Math.floor(Math.random()*10)
     odo: Date.now() / 22
+  response.json resp
+  fbui.updateData resp
 
 app.post "/routes/:id", (request, response)->
   response.json router.updateById request.body
