@@ -103,7 +103,7 @@ class FBui
     @fb.font("fantasy", 18)
     inst = instruction.match(/.{1,21}/g);
     @fb.text(@bars.left + @labelPadding.x, 150, inst[0])
-    @fb.text(@bars.left + @labelPadding.x, @labelPadding.y * 2, inst[1] + "...") if inst.length > 1
+    @fb.text(@bars.left + @labelPadding.x, 150 +@labelPadding.y * 2, inst[1] + "...") if inst.length > 1
 
 
 
@@ -147,5 +147,6 @@ class FBui
   pad:(n, width = 8, z = "0")->
     n = n + '' #make it a string
     n.length >= width ? n : new Array(width - n.length + 1).join(z) + n
+    n
 
 module.exports = FBui
