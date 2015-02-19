@@ -13,8 +13,7 @@ dotenv.load()
 if "#{process.env.ISPI}" == "1"
   FBui = require './display/fb'
   fbui = new FBui
-  fbui.start()
-
+  
 ## rally stuff
 router = new Router(routes)
 
