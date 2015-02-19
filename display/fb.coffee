@@ -56,7 +56,7 @@ class FBui
     @currentInstruction ||= data.instruction
     @currentCast ||= data.cast
     @currentOdo ||= data.odo
-    
+
   scaleLines: ()->
     @fb.color(1,1,1)
     #horizontal markers
@@ -171,11 +171,11 @@ class FBui
     @fb.blit()
     @counter++
 
-  start: (updateInterval = 100)->
+  start: ->
     do timer = ()->
       setInterval ()->
-        fbui.draw()
+        @draw()
       ,
-      updateInterval
+      100
 
 module.exports = FBui
