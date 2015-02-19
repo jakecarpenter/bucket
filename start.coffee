@@ -1,4 +1,6 @@
-fbui = require './display/fb'
+FBui = require './display/fb'
+
+fbui = new FBui
 
 do timer = ()->
   setInterval ()->
