@@ -22,6 +22,7 @@ if "#{process.env.ISPI}" == "1"
   fbui = new FBui
   do timer = ()->
     setInterval ()->
+      console.log "update!"
       fbui.draw()
     ,
     100
