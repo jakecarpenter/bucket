@@ -95,13 +95,13 @@ class FBui
   odo: (reading)->
     @fb.color(0,0,1)
     @fb.font("arial", 45)
-    @fb.text(@bars.right, 30, reading, true)
+    @fb.text(@bars.right, 30, reading/100, true)
 
 
   instruction: (instruction)->
     @fb.color(0,0,1)
     @fb.font("fantasy", 18)
-    @fb.text(@bars.right, 150, instruction, true)
+    @fb.text(@bars.right, 150, instruction)
 
 
   untilNext: (dtn)->
