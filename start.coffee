@@ -16,7 +16,7 @@ comp = new RallyComputer
 
 ## display stuff
 #the pitft framebuffer display
-
+console.log "pitft enabled: ", "#{process.env.ISPI}" == "1"
 if "#{process.env.ISPI}" == "1"
   FBui = require './display/fb'
   fbui = new FBui
