@@ -36,9 +36,6 @@ class FBui
     @fb = pitft "/dev/fb1", true
     @fb.clear()
 
-    @
-
-
   scaleLines: ()->
     @fb.color(1,1,1)
     #horizontal markers
@@ -132,6 +129,7 @@ class FBui
     time = Math.floor(Date.now() / 1000);
     @fb.clear()
     @uiLines()
+    @uiLabels()
     @scaleLines()
     # marker(@counter - 20)
     @odo(11222+@counter)
