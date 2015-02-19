@@ -51,15 +51,13 @@ class FBui
     @counter = 0
     @fb = pitft "/dev/fb1", true
     @fb.clear()
-    do @timer = =>
-      setInterval =>
-        @draw()
-      , 100
+    @draw()
 
-  updateData: (data)->
+  updateData: (data = {})->
     @currentInstruction ||= data.instruction
     @currentCast ||= data.cast
     @currentOdo ||= data.odo
+    @draw()
 
   scaleLines: ()->
     @fb.color(1,1,1)
