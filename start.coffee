@@ -46,7 +46,7 @@ app.post "/routes", (request, response)->
   response.json router.addRoute request.body
   router.save()
 
-app.post "/update", (request, response)->
+app.get "/update", (request, response)->
   response.json true
   fbui.updateData
     cast: Math.floor(Math.random()*10)
