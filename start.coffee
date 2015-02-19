@@ -9,15 +9,11 @@ dotenv.load()
 
 ## display stuff
 #the pitft framebuffer display
-if process.env.ISPI == 0
+
+if "#{process.env.ISPI}" == "1"
   FBui = require './display/fb'
   fbui = new FBui
-
-  do timer = ()->
-    setInterval ()->
-      fbui.draw()
-    ,
-    100
+  fbui.start()
 
 ## rally stuff
 router = new Router(routes)
@@ -34,6 +30,13 @@ app.use "/public", express.static(__dirname + '/public')
 app.get "/routes", (request, response)->
   response.json router.all()
   router.save()
+
+app.get "/odo", (request, response)->
+  response.json true
+  fbui.updateData
+    odo: 1234
+    cast: 32
+    instruction: "asdfaslkdfalskdfj"
 
 app.get "/routes/:id", (request, response)->
   response.json router.byId(request.params.id)

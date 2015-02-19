@@ -41,12 +41,22 @@ class FBui
       g:0.5
       b:0.1      
 
+  # things relevant to displaying real data
+  currentOdo: 0
+  currentInstruction: "--none loaded--"
+  currentCast: 0
+
   constructor: ()->
     @start = Math.floor(Date.now() / 1000)
     @counter = 0
     @fb = pitft "/dev/fb1", true
     @fb.clear()
 
+  updateData: (data)->
+    @currentInstruction ||= data.instruction
+    @currentCast ||= data.cast
+    @currentOdo ||= data.odo
+    
   scaleLines: ()->
     @fb.color(1,1,1)
     #horizontal markers
@@ -152,13 +162,20 @@ class FBui
     @uiLines()
     @uiLabels()
     @scaleLines()
-    @marker(@counter - 20)
-    @odo(11222+@counter)
-    @instruction("HARD RT at Stop Sign and then do some stuff so you win!")
-    @untilNext(33-@counter)
-    @speed(43 + Math.floor(@counter/3))
-    @cast(45)
+    # @marker(@counter - 20)
+    @odo(@currentOdo)
+    @instruction(@currentInstruction)
+    # @untilNext(33-@counter)
+    # @speed(43 + Math.floor(@counter/3))
+    @cast(@currentCast)
     @fb.blit()
     @counter++
+
+  start: (updateInterval = 100)->
+    do timer = ()->
+      setInterval ()->
+        fbui.draw()
+      ,
+      updateInterval
 
 module.exports = FBui
