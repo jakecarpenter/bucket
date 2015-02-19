@@ -146,7 +146,8 @@ class FBui
 
   pad:(n, width = 8, z = "0")->
     n = "#{n}" #make it a string
-    n.length >= width ? n : new Array(width - n.length + 1).join(z) + n
-    n
+    if n.length >= width
+      string = [].join(z) + n
+    string
 
 module.exports = FBui
