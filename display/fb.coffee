@@ -93,6 +93,7 @@ class FBui
 
 
   odo: (reading)->
+    reading = "#{reading}"
     reading = reading.split("").reverse() #string to array
     reading = reading.join([0,0,0,0,0,0,0,0]).slice(0,8).reverse()
     @fb.color(0,0,1)
