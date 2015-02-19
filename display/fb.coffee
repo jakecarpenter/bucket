@@ -101,9 +101,9 @@ class FBui
   instruction: (instruction)->
     @fb.color(0,0,1)
     @fb.font("fantasy", 18)
-    inst = instruction.match(/.{1,24}/g);
+    inst = instruction.match(/.{1,21}/g);
     @fb.text(@bars.left + @labelPadding.x, 150, inst[0])
-    @fb.text(@bars.left + @labelPadding.x, 150, inst[1] + "...") if inst.length > 1
+    @fb.text(@bars.left + @labelPadding.x, 165, inst[1] + "...") if inst.length > 1
 
 
 
