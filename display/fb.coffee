@@ -51,7 +51,6 @@ class FBui
     @counter = 0
     @fb = pitft "/dev/fb1", true
     @fb.clear()
-    @draw()
 
   updateData: (data = {})->
     @currentInstruction ||= data.instruction

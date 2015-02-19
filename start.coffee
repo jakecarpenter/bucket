@@ -22,7 +22,7 @@ if "#{process.env.ISPI}" == "1"
   fbui = new FBui
   do timer = ->
     setInterval ->
-      fbui.updateData comp.data()
+      fbui.draw()
     , 100
 
 #web stuff
