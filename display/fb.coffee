@@ -99,7 +99,7 @@ class FBui
     @fb.color(0,0,1)
     @fb.font("arial", 45)
     # lets draw each digit sep. 
-    offset = width - bars.left / 8 # 8 digit odo
+    offset = @width - bars.left / 8 # 8 digit odo
     for i in [1..8] by 1
       @fb.text(@bars.left + (offset * i), 50, reading[i])
 
