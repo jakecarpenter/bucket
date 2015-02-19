@@ -49,8 +49,14 @@ app.post "/routes", (request, response)->
 app.get "/update", (request, response)->
   response.json true
   fbui.updateData
-    cast: Math.floor(Math.random()*10)
+    cast: Math.floor(Math.random()*100)
     odo: Date.now()
+
+app.get "/updates", (request, response)->
+  response.json true
+  fbui.updateData
+    cast: Math.floor(Math.random()*10)
+    odo: Date.now() / 22
 
 app.post "/routes/:id", (request, response)->
   response.json router.updateById request.body
