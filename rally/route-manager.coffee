@@ -92,6 +92,13 @@ class RouteManager
           route
     byname
 
+  activate: (id)->
+    results = []
+    for route in @routes
+      if route?.id.toString() == id.toString()
+        results.push route
+    @active = results[0]
+
   byId: (id)->
     results = []
     for route in @routes

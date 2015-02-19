@@ -42,6 +42,15 @@ app.get "/routes", (request, response)->
 app.get "/routes/:id", (request, response)->
   response.json router.byId(request.params.id)
 
+app.get "/routes/:id/steps", (request, response)->
+  response.json router.byId(request.params.id).allsteps()
+
+app.post "/routes/:id/steps", (request, response)->
+  response.json router.byId(request.params.id).addStep(request.body)
+
+app.get "/routes/:id/activate", (request, response)->
+  response.json router.activate(request.params.id)
+
 app.post "/routes", (request, response)->
   response.json router.addRoute request.body
   router.save()
