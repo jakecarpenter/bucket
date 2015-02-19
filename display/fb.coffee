@@ -95,7 +95,7 @@ class FBui
   odo: (reading)->
     @fb.color(0,0,1)
     @fb.font("arial", 45)
-    @fb.text(@bars.right, 30, reading/100)
+    @fb.text(@bars.left, 30, @pad(reading/100, 8))
 
 
   instruction: (instruction)->
@@ -103,7 +103,7 @@ class FBui
     @fb.font("fantasy", 18)
     inst = instruction.match(/.{1,21}/g);
     @fb.text(@bars.left + @labelPadding.x, 150, inst[0])
-    @fb.text(@bars.left + @labelPadding.x, 165, inst[1] + "...") if inst.length > 1
+    @fb.text(@bars.left + @labelPadding.x, @labelPadding.y * 2, inst[1] + "...") if inst.length > 1
 
 
 
@@ -143,5 +143,10 @@ class FBui
     @cast(45)
     @fb.blit()
     @counter++
+
+  pad:(n, width, z)->
+    z = z or '0'
+    n = n + ''
+    n.length >= width ? n : new Array(width - n.length + 1).join(z) + n
 
 module.exports = FBui
