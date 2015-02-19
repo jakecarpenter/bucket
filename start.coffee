@@ -31,11 +31,12 @@ app.get "/routes", (request, response)->
   router.save()
 
 app.get "/odo", (request, response)->
-  response.json true
+  time = Date.now()
   fbui.updateData
-    odo: Date.now()
-    cast: 32
+    odo: time
+    cast: Math.floor(Math.random() * 100)
     instruction: "asdfaslkdfalskdfj"
+  response.json true
 
 app.get "/routes/:id", (request, response)->
   response.json router.byId(request.params.id)
