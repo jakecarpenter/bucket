@@ -51,8 +51,8 @@ class FBui
     @counter = 0
     @fb = pitft "/dev/fb1", true
     @fb.clear()
-    do
-      @timer = setInterval =>
+    do @timer = ->
+      setInterval =>
         @draw()
       , 100
 
