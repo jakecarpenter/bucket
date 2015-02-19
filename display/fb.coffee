@@ -110,10 +110,10 @@ class FBui
     @fb.font("arial", 45)
     # lets draw each digit sep. 
     offset = (@width - @bars.left) / 8 # 8 digit odo
-    for i in [0..6]
+    for i in [1...6]
       @fb.text(@bars.left + (offset * i), 50, reading[i])
     @fb.color(@dataColor.secondary.r,@dataColor.secondary.g,@dataColor.secondary.b)
-    for i in [7..8]
+    for i in [7...8]
       @fb.text(@bars.left + (offset * i), 50, reading[i])
 
 
