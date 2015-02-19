@@ -34,12 +34,12 @@ class FBui
   dataColor:
     main:
       r:0
-      g:0.7
-      b:0.2
+      g:1
+      b:0
     secondary:
       r:0
-      g:1
-      b:0      
+      g:0.5
+      b:0.1      
 
   constructor: ()->
     @start = Math.floor(Date.now() / 1000)
