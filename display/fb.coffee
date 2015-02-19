@@ -37,6 +37,8 @@ class fbui
     @fb = pitft "/dev/fb1", true
     @fb.clear()
 
+    @
+
 
   scaleLines: ()->
     @fb.color(1,1,1)
