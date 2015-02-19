@@ -1,7 +1,6 @@
 pitft = require 'pitft'
 
-class fbui
-
+class FBui
   #set some dimensions
   width: 320
   height: 240
@@ -143,4 +142,4 @@ class fbui
     @fb.blit()
     @counter++
 
-module.exports.fbui = fbui
+module.exports = FBui
