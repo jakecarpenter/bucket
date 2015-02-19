@@ -95,7 +95,9 @@ class FBui
   odo: (reading)->
     reading = "#{reading}"
     reading = reading.split("").reverse() #string to array
-    reading = reading.join([0,0,0,0,0,0,0,0]).slice(0,8).reverse()
+    reading = reading.join([0,0,0,0,0,0,0,0])
+    reading = reading.slice(0,8)
+    reading = reading.reverse()
     @fb.color(0,0,1)
     @fb.font("arial", 45)
     # lets draw each digit sep. 
