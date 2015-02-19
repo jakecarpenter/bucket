@@ -93,9 +93,14 @@ class FBui
 
 
   odo: (reading)->
+    reading = reading.split("").reverse() #string to array
+    reading = reading.join([0,0,0,0,0,0,0,0]).slice(0,8).reverse()
     @fb.color(0,0,1)
     @fb.font("arial", 45)
-    @fb.text(@bars.left, 30, @pad(reading))
+    # lets draw each digit sep. 
+    offset = width = bars.left / 8 # 8 digit odo
+    for i in [1..8] by 1
+      @fb.text(@bars.left + (offset * i), 30, reading[i])
 
 
   instruction: (instruction)->
@@ -143,11 +148,5 @@ class FBui
     @cast(45)
     @fb.blit()
     @counter++
-
-  pad:(n, width = 8, z = "0")->
-    n = "#{n}" #make it a string
-    if n.length >= width
-      string = [].join(z) + n
-    string
 
 module.exports = FBui
