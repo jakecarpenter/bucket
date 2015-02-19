@@ -33,7 +33,7 @@ app.get "/routes", (request, response)->
 app.get "/odo", (request, response)->
   response.json true
   fbui.updateData
-    odo: Date.now() / 100000
+    odo: Date.now()
     cast: 32
     instruction: "asdfaslkdfalskdfj"
 
