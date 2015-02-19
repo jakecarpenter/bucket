@@ -20,10 +20,11 @@ console.log "pitft enabled: ", "#{process.env.ISPI}" == "1"
 if "#{process.env.ISPI}" == "1"
   FBui = require './display/fb'
   fbui = new FBui
-  do timer = ->
-    setInterval ->
+  do timer = ()->
+    setInterval ()->
       fbui.draw()
-    , 100
+    ,
+    100
 
 #web stuff
 app = new express()
@@ -37,14 +38,6 @@ app.use "/public", express.static(__dirname + '/public')
 app.get "/routes", (request, response)->
   response.json router.all()
   router.save()
-
-app.get "/odo", (request, response)->
-  blah()
-  response.json true
-
-blah = ->
-  time = Date.now()
-  
 
 app.get "/routes/:id", (request, response)->
   response.json router.byId(request.params.id)
