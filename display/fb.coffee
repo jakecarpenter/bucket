@@ -95,7 +95,7 @@ class FBui
   odo: (reading)->
     @fb.color(0,0,1)
     @fb.font("arial", 45)
-    @fb.text(@bars.left, 30, @pad(reading/100, 8))
+    @fb.text(@bars.left, 30, @pad(reading/100))
 
 
   instruction: (instruction)->
@@ -144,9 +144,8 @@ class FBui
     @fb.blit()
     @counter++
 
-  pad:(n, width, z)->
-    z = z or '0'
-    n = n + ''
+  pad:(n, width = 8, z = "0")->
+    n = n + '' #make it a string
     n.length >= width ? n : new Array(width - n.length + 1).join(z) + n
 
 module.exports = FBui
