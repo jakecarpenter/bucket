@@ -1,0 +1,19 @@
+  <h2>{{route.name}} ({{route.id}})</h2>
+  <table  class="table table-striped">
+    <tr>
+      <th>id</th>
+      <th>Notes</th>
+      <th>Start Time</th>
+      <th>Start Mileage</th>
+      <th>Description</th>
+      <th>#steps</th>
+    </tr>
+    <tr ng-repeat="step in route.steps | filter : search" >
+      <td>{{step.id}}</td>
+      <td>{{step.name}}</td>
+      <td>{{step.startTime}}</td>
+      <td>{{step.startMileage}}</td>
+      <td>{{step.description}}</td>
+      <td>{{step.totalSteps}}</td>
+    </tr>
+  </table>

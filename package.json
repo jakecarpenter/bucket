@@ -3,7 +3,7 @@
   "name": "bucket",
   "description": "Bucket is a Rally ODO",
   "version": "0.0.0",
-  "homepage": "jakecarpenter.com/bucket",
+  "homepage": "http://github.com/jakecarpenter/bucket",
   "repository": {
     "url": ""
   },
@@ -15,6 +15,7 @@
   "dependencies": {
     "bindings": "~1.2.1",
     "coffee-script": "^1.9.1",
+    "express": "^4.11.2",
     "pitft": "0.0.10"
   },
   "devDependencies": {},
