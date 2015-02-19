@@ -143,4 +143,4 @@ class fbui
     @fb.blit()
     @counter++
 
-module.exports = fbui
+module.exports.fbui = fbui
