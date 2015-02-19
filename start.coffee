@@ -43,7 +43,8 @@ app.get "/routes/:id", (request, response)->
   response.json router.byId(request.params.id)
 
 app.get "/routes/:id/steps", (request, response)->
-  response.json router.byId(request.params.id).allsteps()
+  route = router.byId(request.params.id)
+  response.json route.allsteps()
 
 app.post "/routes/:id/steps", (request, response)->
   response.json router.byId(request.params.id).addStep(request.body)
