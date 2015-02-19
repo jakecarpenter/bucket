@@ -1,19 +1,17 @@
-  <h2>{{route.name}} ({{route.id}})</h2>
+  <h2><a href="/">Routes</a> >> {{route.name}} ({{route.id}})</h2>
   <table  class="table table-striped">
     <tr>
-      <th>id</th>
-      <th>Notes</th>
+      <th>cast</th>
       <th>Start Time</th>
       <th>Start Mileage</th>
-      <th>Description</th>
-      <th>#steps</th>
+      <th>Instructions</th>
+      <th>Notes</th>
     </tr>
     <tr ng-repeat="step in route.steps | filter : search" >
-      <td>{{step.id}}</td>
-      <td>{{step.name}}</td>
+      <td>{{step.cast}}</td>
       <td>{{step.startTime}}</td>
-      <td>{{step.startMileage}}</td>
-      <td>{{step.description}}</td>
-      <td>{{step.totalSteps}}</td>
+      <td>{{step.startMile}}</td>
+      <td>{{step.instruction}}</td>
+      <td>{{step.notes}}</td>
     </tr>
   </table>

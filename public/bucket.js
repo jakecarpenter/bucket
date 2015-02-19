@@ -21,6 +21,10 @@ routeManagerApp.controller("StepController", function($scope, $http, $routeParam
       // log error
     });
 
+  $scope.selectRoute = function(id){
+    $location.path("/route/"+ id)
+  }
+
   
 });
 

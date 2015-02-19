@@ -21,7 +21,7 @@ class RouteStep
 
   computeLength: ->
     # find out how long it takes to go the distance at the CAST
-    (60 * @distance) / @cast
+    (6 * @distance) / @cast
 
 class Route
 

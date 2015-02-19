@@ -5,15 +5,19 @@
       <th>id</th>
       <th>Notes</th>
       <th>Start Time</th>
+      <th>Total Time</th>
       <th>Start Mileage</th>
+      <th>total Mileage</th>
       <th>Description</th>
       <th>#steps</th>
     </tr>
     <tr ng-repeat="route in routes | filter : search" >
-      <td>{{route.id}}</td>
+      <td><a href="#/route/{{route.id}}">{{route.id}}</a></td>
       <td>{{route.name}}</td>
       <td>{{route.startTime}}</td>
+      <td>{{route.length}}</td>
       <td>{{route.startMileage}}</td>
+      <td>{{route.distance}}</td>
       <td>{{route.description}}</td>
       <td>{{route.totalSteps}}</td>
     </tr>

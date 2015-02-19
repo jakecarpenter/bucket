@@ -1,20 +1,26 @@
-# FBui = require './display/fb'
+# things we need
 Router = require './rally/route-manager'
 routes = require './data/routes.json'
 express = require 'express'
 
-## display stuff
-# fbui = new FBui
+#config info (from .env)
+dotenv = require 'dotenv'
+dotenv.load()
 
-# do timer = ()->
-#   setInterval ()->
-#     fbui.draw()
-#   ,
-#   100
+## display stuff
+#the pitft framebuffer display
+if process.env.ISPI == 0
+  FBui = require './display/fb'
+  fbui = new FBui
+
+  do timer = ()->
+    setInterval ()->
+      fbui.draw()
+    ,
+    100
 
 ## rally stuff
 router = new Router(routes)
-
 
 #web stuff
 app = new express()
