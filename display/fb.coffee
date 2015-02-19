@@ -33,9 +33,9 @@ class FBui
 
   dataColor:
     main:
-      r:1
-      g:0
-      b:1
+      r:0
+      g:0.7
+      b:0.2
     secondary:
       r:0
       g:1
