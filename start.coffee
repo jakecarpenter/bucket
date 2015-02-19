@@ -1,5 +1,6 @@
 # things we need
 Router = require './rally/route-manager'
+RallyComputer = require './rally/rally-computer'
 routes = require './data/routes.json'
 express = require 'express'
 
@@ -7,15 +8,22 @@ express = require 'express'
 dotenv = require 'dotenv'
 dotenv.load()
 
+
+
+## rally stuff
+router = new Router(routes)
+comp = new RallyComputer
+
 ## display stuff
 #the pitft framebuffer display
 
 if "#{process.env.ISPI}" == "1"
   FBui = require './display/fb'
   fbui = new FBui
-
-## rally stuff
-router = new Router(routes)
+  do timer = ->
+    setInterval ->
+      fbui.updateData comp.data()
+    , 100
 
 #web stuff
 app = new express()
@@ -36,10 +44,7 @@ app.get "/odo", (request, response)->
 
 blah = ->
   time = Date.now()
-  fbui.updateData
-    odo: time
-    cast: Math.floor(Math.random() * 100)
-    instruction: "asdfaslkdfalskdfj"
+  
 
 app.get "/routes/:id", (request, response)->
   response.json router.byId(request.params.id)
