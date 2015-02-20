@@ -3,7 +3,7 @@ Router = require './rally/route-manager'
 RallyComputer = require './rally/rally-computer'
 routes = require './data/routes.json'
 express = require 'express'
-
+bodyparser = require 'body-parser'
 #config info (from .env)
 dotenv = require 'dotenv'
 dotenv.load()
@@ -33,6 +33,8 @@ app.use (request, response, next)->
   console.log response.statusCode, request.path, ":", Date.now()
   next()
 
+app.use bodyparser.json()
+
 app.use "/public", express.static(__dirname + '/public')
 
 app.get "/routes", (request, response)->
@@ -43,11 +45,13 @@ app.get "/routes/:id", (request, response)->
   response.json router.byId(request.params.id)
 
 app.get "/routes/:id/steps", (request, response)->
-  route = router.byId(request.params.id)
+  route = router.byId(request.params.id)[0]
   response.json route.allsteps()
 
 app.post "/routes/:id/steps", (request, response)->
-  response.json router.byId(request.params.id).addStep(request.body)
+  route = router.byId(request.params.id)[0]
+  response.json route.addStep request.body
+  router.save()
 
 app.get "/routes/:id/activate", (request, response)->
   response.json router.activate(request.params.id)
@@ -61,13 +65,6 @@ app.get "/update", (request, response)->
   fbui.updateData
     cast: Math.floor(Math.random()*100)
     odo: Date.now()
-
-app.get "/updates", (request, response)->
-  resp = 
-    cast: Math.floor(Math.random()*10)
-    odo: Date.now() / 22
-  response.json resp
-  fbui.updateData resp
 
 app.post "/routes/:id", (request, response)->
   response.json router.updateById request.body

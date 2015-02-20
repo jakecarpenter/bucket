@@ -24,7 +24,7 @@ class RouteStep
     (6 * @distance) / @cast
 
 class Route
-
+  activeId: 0
   name: ""
   id: 0
   steps: []
@@ -40,7 +40,7 @@ class Route
     @description = route.description or "a bucket route"
     @length = 0
     @distance = 0
-    @startMileage = 0
+    @startMileage = route.startMile or 0
     @totalSteps = 0
     if route.steps
       for step in route.steps
@@ -66,7 +66,8 @@ class Route
   compute: ->
     @length = @routeLength()
     @distance = @routeDistance()
-    @startMileage = @steps[0].startMile
+    if @steps.length != 0
+      @startMileage = @steps[0].startMile or 0
     @totalSteps = @steps.length
   allsteps: ->
     @steps
@@ -81,7 +82,9 @@ class RouteManager
       @addRoute route
 
   addRoute: (route)->
-    @routes.push new Route(route)
+    newRoute = new Route(route)
+    @routes.push newRoute
+    newRoute
 
   listByName: ->
     byname = []
@@ -97,7 +100,7 @@ class RouteManager
     for route in @routes
       if route?.id.toString() == id.toString()
         results.push route
-    @active = results[0]
+    @activeId = results[0].id
 
   byId: (id)->
     results = []
@@ -107,7 +110,14 @@ class RouteManager
     results
 
   all: ->
-    @routes
+    routes = []
+    for route in @routes
+      if @activeId == route.id
+        route.active = true
+      else
+        route.active = false
+      routes.push route
+    routes
 
   first: ->
     @routes[0]

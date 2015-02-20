@@ -10,7 +10,21 @@
 <title>Route Manager</title>
 </head>
 <body>
-  <div id="main">
+  <div class="navbar navbar-inverse navbar-fixed-top" ng-controller="RouteNavController">
+    <div class="navbar-inner">
+        <ul class="nav">
+          <li class="active"><a href="#">Routes</a></li>
+          <li><a href="#display">Display</a></li>
+          <li><a href="#admin">Admin</a></li>
+        </ul>
+        <div class="pull-right">
+          <button class="btn btn-success add-route" ng-click="addRoute()">+ Route</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="container">
     <div ng-view></div>
   </div>
 </body>

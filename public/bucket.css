@@ -1,6 +1,10 @@
 body{
-  padding:20px;
+  padding:60px;
 }
 .search{
   margin-left:10px;
+}
+
+button.add-route {
+  margin-right: 10px;
 }

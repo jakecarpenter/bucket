@@ -1,0 +1,44 @@
+<ul class="breadcrumb">
+  <li><a href="#/">Routes</a> <span class="divider">/</span></li>
+  <li><a href="#/route/{{route.id}}">{{route.name}}</a> <span class="divider">/</span></li>
+  <li><a href="#/">Steps</a> <span class="divider">/</span></li>
+  <li>Add</li>
+</ul>
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="inputCast">CAST</label>
+    <div class="controls">
+      <input type="text" id="inputName" ng-model="cast" placeholder="CAST">
+    </div>
+  </div>
+    <div class="control-group">
+    <label class="control-label" for="inputStartMile">Start Mile</label>
+    <div class="controls">
+      <input type="text" id="inputStartMile" ng-model="startMile" placeholder="start mileage">
+    </div>
+  </div>
+    <div class="control-group">
+    <label class="control-label" for="inputEndMile">End Mile</label>
+    <div class="controls">
+      <input type="text" id="inputEndMile" ng-model="endMile" placeholder="end mileage">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputInstruction">Instruction</label>
+    <div class="controls">
+      <input type="text" id="inputInstruction" ng-model="instruction" placeholder="Instruction">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputNotes">Notes</label>
+    <div class="controls">
+      <textarea rows=5 id="inputNotes" ng-model="notes" placeholder="step notes"> </textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button ng-click="addStep()" class="btn btn-warn">Add</button>
+    </div>
+  </div>
+</form>

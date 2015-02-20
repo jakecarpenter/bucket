@@ -1,17 +1,25 @@
-  <h2><a href="/">Routes</a> >> {{route.name}} ({{route.id}})</h2>
-  <table  class="table table-striped">
-    <tr>
-      <th>cast</th>
-      <th>Start Time</th>
-      <th>Start Mileage</th>
-      <th>Instructions</th>
-      <th>Notes</th>
-    </tr>
-    <tr ng-repeat="step in route.steps | filter : search" >
-      <td>{{step.cast}}</td>
-      <td>{{step.startTime}}</td>
-      <td>{{step.startMile}}</td>
-      <td>{{step.instruction}}</td>
-      <td>{{step.notes}}</td>
-    </tr>
-  </table>
+<ul class="breadcrumb">
+  <li><a href="#/">Routes</a> <span class="divider">/</span></li>
+  <li>{{route.name}}</li>
+</ul>
+<table  class="table table-striped">
+  <tr>
+    <th>cast</th>
+    <th>Time</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Instructions</th>
+    <th>Notes</th>
+  </tr>
+  <tr ng-repeat="step in route.steps | filter : search" >
+    <td>{{step.cast}}</td>
+    <td>{{step.startTime}}</td>
+    <td>{{step.startMile/10}}</td>
+    <td>{{step.endMile/10}}</td>
+    <td>{{step.instruction}}</td>
+    <td>{{step.notes}}</td>
+  </tr>
+
+</table>
+
+<button class="btn btn-success" ng-click="addStep()">Add A Step</button>

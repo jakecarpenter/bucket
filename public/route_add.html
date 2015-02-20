@@ -1,0 +1,35 @@
+<ul class="breadcrumb">
+  <li><a href="#/">Routes</a> <span class="divider">/</span></li>
+  <li>New</li>
+</ul>
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Name</label>
+    <div class="controls">
+      <input type="text" id="inputName" ng-model="name" placeholder="route name">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputStartTime">Start Time</label>
+    <div class="controls">
+      <input type="text" id="inputStartTime" ng-model="startTime" placeholder="start time">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputStartMile">Start Mile</label>
+    <div class="controls">
+      <input type="text" id="inputStartMile" ng-model="startMile" placeholder="start mileage">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputDescription">Description</label>
+    <div class="controls">
+      <textarea rows=5 id="inputDescription" ng-model="description" placeholder="description"> </textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button ng-click="newRoute()" class="btn btn-warn">Create</button>
+    </div>
+  </div>
+</form>
