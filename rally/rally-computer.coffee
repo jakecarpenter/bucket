@@ -1,3 +1,5 @@
+onoff = require 'onoff'
+
 class RallyComputer
   constructor: ->
     true

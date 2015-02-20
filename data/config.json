@@ -1,0 +1,15 @@
+{
+  "car_number": 23,
+  "odometers": [
+    {
+      "pin": 12,
+      "state": 1,
+      "name": "speedo sensor" 
+    },
+    {
+      "pin": 14,
+      "state": 1,
+      "name": "RR wheel" 
+    }
+  ] 
+}
