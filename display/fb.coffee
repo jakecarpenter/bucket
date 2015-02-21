@@ -47,6 +47,7 @@ class FBui
   currentOdo: 0
   currentInstruction: "--none loaded--"
   currentCast: 0
+  drawCounter: 0
 
   constructor: ->
     @start = Math.floor(Date.now() / 1000)
@@ -54,10 +55,13 @@ class FBui
     @fb = pitft "/dev/fb1", true
     @fb.clear()
     touch "/dev/input/touchscreen", @handleTouch
-    console.log "after touch?"
+    @draw = @drawClock
 
   handleTouch: (err, data)->
-    console.log data
+    counter = 0 unles counter < 3
+    drawModes = [@drawRally, @drawConfig, @drawClock]
+    @draw = drawModes[counter]
+    counter++
 
   updateData: (data = {})->
     @currentInstruction = data.instruction or @currentInstruction
@@ -161,7 +165,68 @@ class FBui
     @fb.font("fantasy", 45)
     @fb.text(145, 220, cast, true)
 
-  draw: ->
+  # our different screens
+  drawConfig: ->
+    # Clear the back buffer
+    fb.clear()
+    @uiLines()
+
+  drawClock: ->
+    # Clear the back buffer
+    fb.clear()
+    xMax = fb.size().width
+    yMax = fb.size().height
+    radius = yMax / 2 - 10
+    RA = 180 / Math.PI
+
+    drawDial = ->
+      fb.color 1, 1, 1
+      fb.circle xMax / 2, yMax / 2, radius
+      fb.color 0, 0, 0
+      a = 0
+      while a < 360
+        x0 = undefined
+        y0 = undefined
+        x0 = xMax / 2 + Math.sin(a / RA) * radius * 0.95
+        y0 = yMax / 2 + Math.cos(a / RA) * radius * 0.95
+        if a % 30 == 0
+          x1 = xMax / 2 + Math.sin(a / RA) * radius * 0.85
+          y1 = yMax / 2 + Math.cos(a / RA) * radius * 0.85
+          fb.line x0, y0, x1, y1, radius * 0.05
+        else
+          x1 = xMax / 2 + Math.sin(a / RA) * radius * 0.90
+          y1 = yMax / 2 + Math.cos(a / RA) * radius * 0.90
+          fb.line x0, y0, x1, y1, radius * 0.01
+        a += 6
+      return
+
+    hand = (_fb, x, y, angle, length, width) ->
+      x0 = xMax / 2 + Math.sin(angle / RA)
+      y0 = yMax / 2 - Math.cos(angle / RA)
+      x1 = xMax / 2 + Math.sin(angle / RA) * length
+      y1 = yMax / 2 - Math.cos(angle / RA) * length
+      fb.line x0, y0, x1, y1, width
+      return
+
+    update = ->
+      now = new Date
+      midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0)
+      hours = (now.getTime() - midnight.getTime()) / 1000 / 60 / 60
+      minutes = hours * 60 % 60
+      seconds = parseInt(minutes * 60 % 60)
+      fb.color 1, 1, 1
+      fb.circle xMax / 2, yMax / 2, radius * 0.85
+      fb.color 1, 0, 0
+      hand fb, 0, 0, hours / 12 * 360, radius * 0.6, radius * 0.05
+      hand fb, 0, 0, minutes / 60 * 360, radius * 0.8, radius * 0.05
+      fb.color 0, 0, 0
+      hand fb, 0, 0, seconds / 60 * 360, radius * 0.8, radius * 0.015
+      fb.color 1, 0, 0
+      fb.circle xMax / 2, yMax / 2, radius * 0.075
+      fb.blit()
+      # Transfer the back buffer to the screen buffer
+
+  drawRally: ->
     if(@counter == 40)
       @counter = 0
 
