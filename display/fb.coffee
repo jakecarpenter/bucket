@@ -1,4 +1,5 @@
 pitft = require 'pitft'
+touch = require 'pitft-touch'
 moment = require 'moment'
 
 class FBui
@@ -52,6 +53,10 @@ class FBui
     @counter = 0
     @fb = pitft "/dev/fb1", true
     @fb.clear()
+    touch "/dev/input/touchscreen", @handleTouch
+
+  handleTouch: (err, data)->
+    console.log data
 
   updateData: (data = {})->
     @currentInstruction = data.instruction or @currentInstruction
