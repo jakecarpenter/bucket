@@ -21,6 +21,10 @@ class FBui
     middle: 120
     bottom: 180
 
+  #fonts
+  font:
+    primary:"fantasy"
+    secondary: "arial"
   #label settings
   labelColor:
     r: 0
@@ -54,14 +58,6 @@ class FBui
     @counter = 0
     @fb = pitft "/dev/fb1", true
     @fb.clear()
-    touch "/dev/input/touchscreen", @handleTouch
-    @draw = @drawClock
-
-  handleTouch: (err, data)->
-    counter = 0 unless counter < 3
-    drawModes = [@drawRally, @drawConfig, @drawClock]
-    @draw = drawModes[counter]
-    counter++
 
   updateData: (data = {})->
     @currentInstruction = data.instruction or @currentInstruction
@@ -81,7 +77,7 @@ class FBui
     y = 0
     yoff= 0
     #if the position is negative, we add 120
-    @fb.font("times", 30)
+    @fb.font(@font.primary, 30)
     if pos < -2
       @fb.color(1,0,0)
       y = (Math.abs(pos)*2.5) 
@@ -127,7 +123,7 @@ class FBui
     reading = reading.split("").reverse() #string to array
     reading = reading.concat([0,0,0,0,0,0,0,0]).slice(0,8).reverse()
     @fb.color(@dataColor.main.r,@dataColor.main.g,@dataColor.main.b)
-    @fb.font("arial", 45)
+    @fb.font(@fonts.primary, 45)
     # lets draw each digit sep. 
     offset = (@width - @bars.left) / 8 # 8 digit odo
     for i in [0..5]
@@ -139,94 +135,29 @@ class FBui
 
   instruction: (instruction)->
     @fb.color(0,0,1)
-    @fb.font("fantasy", 18)
+    @fb.font(@fonts.primary, 18)
     inst = instruction.match(/.{1,21}/g);
     @fb.text(@bars.left + @labelPadding.x, 150, inst[0])
     @fb.text(@bars.left + @labelPadding.x, 150 +@labelPadding.y * 2, inst[1] + "...") if inst.length > 1
 
-
-
   untilNext: (dtn)->
     stamp = Math.floor(Date.now() / 1000)
     @fb.color(0,0,1)
-    @fb.font("fantasy", 45)
+    @fb.font(@fonts.primary, 45)
     @fb.text(145, 95, "."+dtn, true)  
     @fb.text(255, 95, ":"+(stamp-@start) , true) 
 
-
   speed: (speed)->
     @fb.color(0,0,1)
-    @fb.font("fantasy", 45)
+    @fb.font(@fonts.primary, 45)
     @fb.text(255, 220, speed, true) 
-
 
   cast: (cast)->
     @fb.color(0,0,1)
-    @fb.font("fantasy", 45)
+    @fb.font(@fonts.primary, 45)
     @fb.text(145, 220, cast, true)
 
-  # our different screens
-  drawConfig: ->
-    # Clear the back buffer
-    fb.clear()
-    @uiLines()
-
-  drawClock: ->
-    # Clear the back buffer
-    @fb.clear()
-    xMax = @fb.size().width
-    yMax = @fb.size().height
-    radius = yMax / 2 - 10
-    RA = 180 / Math.PI
-
-    drawDial = ->
-      @fb.color 1, 1, 1
-      @fb.circle xMax / 2, yMax / 2, radius
-      @fb.color 0, 0, 0
-      a = 0
-      while a < 360
-        x0 = undefined
-        y0 = undefined
-        x0 = xMax / 2 + Math.sin(a / RA) * radius * 0.95
-        y0 = yMax / 2 + Math.cos(a / RA) * radius * 0.95
-        if a % 30 == 0
-          x1 = xMax / 2 + Math.sin(a / RA) * radius * 0.85
-          y1 = yMax / 2 + Math.cos(a / RA) * radius * 0.85
-          @fb.line x0, y0, x1, y1, radius * 0.05
-        else
-          x1 = xMax / 2 + Math.sin(a / RA) * radius * 0.90
-          y1 = yMax / 2 + Math.cos(a / RA) * radius * 0.90
-          @fb.line x0, y0, x1, y1, radius * 0.01
-        a += 6
-      return
-
-    hand = (_fb, x, y, angle, length, width) ->
-      x0 = xMax / 2 + Math.sin(angle / RA)
-      y0 = yMax / 2 - Math.cos(angle / RA)
-      x1 = xMax / 2 + Math.sin(angle / RA) * length
-      y1 = yMax / 2 - Math.cos(angle / RA) * length
-      @fb.line x0, y0, x1, y1, width
-      return
-
-    update = ->
-      now = new Date
-      midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0)
-      hours = (now.getTime() - midnight.getTime()) / 1000 / 60 / 60
-      minutes = hours * 60 % 60
-      seconds = parseInt(minutes * 60 % 60)
-      @fb.color 1, 1, 1
-      @fb.circle xMax / 2, yMax / 2, radius * 0.85
-      @fb.color 1, 0, 0
-      hand fb, 0, 0, hours / 12 * 360, radius * 0.6, radius * 0.05
-      hand fb, 0, 0, minutes / 60 * 360, radius * 0.8, radius * 0.05
-      @fb.color 0, 0, 0
-      hand fb, 0, 0, seconds / 60 * 360, radius * 0.8, radius * 0.015
-      @fb.color 1, 0, 0
-      @fb.circle xMax / 2, yMax / 2, radius * 0.075
-      @fb.blit()
-      # Transfer the back buffer to the screen buffer
-
-  drawRally: ->
+  draw: ->
     if(@counter == 40)
       @counter = 0
 
@@ -238,7 +169,7 @@ class FBui
     # @marker(@counter - 20)
     @odo(@currentOdo)
     # @instruction(@currentInstruction)
-    @instruction(moment().format())
+    @instruction(moment().format("LTS"))
     # @untilNext(33-@counter)
     # @speed(43 + Math.floor(@counter/3))
     @cast(@currentCast)
