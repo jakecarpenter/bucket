@@ -1,4 +1,5 @@
 pitft = require 'pitft'
+moment = require 'moment'
 
 class FBui
   #set some dimensions
@@ -165,7 +166,8 @@ class FBui
     @scaleLines()
     # @marker(@counter - 20)
     @odo(@currentOdo)
-    @instruction(@currentInstruction)
+    # @instruction(@currentInstruction)
+    @instruction(moment().format())
     # @untilNext(33-@counter)
     # @speed(43 + Math.floor(@counter/3))
     @cast(@currentCast)
