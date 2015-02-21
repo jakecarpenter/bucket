@@ -4,9 +4,11 @@ RallyComputer = require './rally/rally-computer'
 routes = require './data/routes.json'
 express = require 'express'
 bodyparser = require 'body-parser'
+moment = require 'moment'
 #config info (from .env)
 dotenv = require 'dotenv'
 dotenv.load()
+
 
 
 
@@ -30,7 +32,7 @@ if "#{process.env.ISPI}" == "1"
 app = new express()
 
 app.use (request, response, next)->
-  console.log response.statusCode, request.path, ":", Date.now()
+  console.log response.statusCode, request.path, ":", moment().format()
   next()
 
 app.use bodyparser.json()
@@ -60,6 +62,12 @@ app.post "/routes", (request, response)->
   response.json router.addRoute request.body
   router.save()
 
+app.get "/time", (request, response)->
+  response.json moment().format()
+
+app.post "/time/:time", (request, response)->
+  response.json setTime request.params.time
+
 app.get "/update", (request, response)->
   response.json true
   fbui.updateData
@@ -74,9 +82,13 @@ app.get "/", (request, response)->
   response.sendfile(__dirname + '/web/index.html')
 
 app.listen 8090
-# blah = router.first()
-# blah.addStep { "cast": 35, "distance": 0, "length": 1234, "instructions": "second" }
 
-# console.log blah.allsteps()
+#basic time setting stuff. only works when started as superuserre
+exec = require('child_process').exec
 
-# router.save()
+setTime = (time)->
+  exec "date -s '#{time}'", (err, stdout, stderr)->
+    return stdout or stderr
+    if error != null
+      console.log Error
+

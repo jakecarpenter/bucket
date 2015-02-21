@@ -1,4 +1,4 @@
-onoff = require 'onoff'
+# onoff = require 'onoff'
 
 class RallyComputer
   constructor: ->
