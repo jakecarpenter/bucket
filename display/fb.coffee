@@ -22,7 +22,7 @@ class FBui
     bottom: 180
 
   #fonts
-  font:
+  fonts:
     primary:"fantasy"
     secondary: "arial"
   #label settings
