@@ -54,6 +54,7 @@ class FBui
     @fb = pitft "/dev/fb1", true
     @fb.clear()
     touch "/dev/input/touchscreen", @handleTouch
+    console.log "after touch?"
 
   handleTouch: (err, data)->
     console.log data
